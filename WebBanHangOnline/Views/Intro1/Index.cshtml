@@ -1,0 +1,49 @@
+﻿@model List<WebBanHangOnline.Models.EF.Intro>
+@{
+    ViewBag.Title = "Giới Thiệu";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/assets/styles/categories_styles.css">
+<link rel="stylesheet" type="text/css" href="~/Content/assets/styles/categories_responsive.css">
+<div class="container product_section_container">
+    <div class="row">
+        <div class="col product_section clearfix">
+
+            <!-- Breadcrumbs -->
+
+            <div class="breadcrumbs d-flex flex-row align-items-center">
+                <ul>
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li class="active"><a href="/"><i class="fa fa-angle-right" aria-hidden="true"></i>Giới thiệu</a></li>
+                </ul>
+            </div>
+
+            <!-- Sidebar -->
+
+            <div class="col-md-12">
+                <div class="sidebar_section">
+                    <div class="sidebar_title">
+                        <h5>Danh mục giới thiệu</h5>
+                    </div>
+                    @Html.Action("MenuLeftIntro", "Intro1")
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9" id="introDetails"></div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Content/assets/js/categories_custom.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.sidebar_categories a').on('click', function (e) {
+                e.preventDefault();
+                var url = $(this).attr('href');
+
+                $.get(url, function (data) {
+                    $('#introDetails').html(data);
+                });
+            });
+        });
+    </script>
+}

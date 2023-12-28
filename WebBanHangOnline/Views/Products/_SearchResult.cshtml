@@ -1,0 +1,106 @@
+﻿@model  List<WebBanHangOnline.Models.EF.Product>
+
+@{
+    ViewBag.Title = "Danh sách sản phẩm tìm kiếm";
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/assets/styles/categories_styles.css">
+<link rel="stylesheet" type="text/css" href="~/Content/assets/styles/categories_responsive.css">
+<div class="container product_section_container">
+    <div class="row">
+        <div class="col product_section clearfix">
+
+            <!-- Breadcrumbs -->
+
+            <div class="breadcrumbs d-flex flex-row align-items-center">
+                <ul>
+                    <li><a href="index.html">Trn</a></li>
+                    <li class="active"><a href="/"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>
+                </ul>
+            </div>
+            <h3>Kết quả tìm kiếm:</h3>
+            <!-- Sidebar -->
+            <!-- Main Content -->
+
+            <div class="main_content">
+
+                <!-- Products -->
+
+                <div class="products_iso">
+                    <div class="row">
+                        <div class="col">
+                            <div class="product-grid">
+
+                                <!-- Product 1 -->
+                                @if (Model != null && Model.Any())
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                        var strImge = "";
+                                        var img = item.ProductImage.FirstOrDefault(x => x.IsDefault);
+                                        if (img != null)
+                                        {
+                                            strImge = img.Image;
+                                        }
+                                        var wishlist = item.Wishlists.FirstOrDefault(x => x.UserName == User.Identity.Name);
+                                        var isWishlist = false;
+                                        if (wishlist != null)
+                                        {
+                                            isWishlist = true;
+                                        }
+                                        <div class="product-item @item.ProductCategory.Alias" style="margin: 0px 0px 100px 5px ">
+                                            <div class="product discount product_filter">
+                                                <div class="product_image">
+                                                    <img src="@strImge" alt="@item.Title">
+                                                </div>
+                                                @if (isWishlist == true)
+
+                                                {
+                                                    <div data-id="@item.Id" class="favorite favorite_left active"></div>
+                                                }
+                                                else
+                                                {
+                                                    <div data-id="@item.Id" class="favorite favorite_left"></div>
+
+                                                }
+                                                <div data-id="@item.Id" class="favorite favorite_left"></div>
+                                                @if (item.PriceSale > 0)
+                                                {
+                                                    <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
+                                                }
+                                                @* <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>*@
+                                                <div class="product_info">
+                                                    <h6 class="product_name"><a href="/chi-tiet/@item.Alias-p@(item.Id)">@item.Title</a></h6>
+                                                    @if (item.PriceSale > 0)
+                                                    {
+                                                        <div class="product_price">@WebBanHangOnline.Common.Common.FormatNumber(item.PriceSale, 0)<span>@WebBanHangOnline.Common.Common.FormatNumber(item.Price, 0)</span></div>
+                                                        <div style="display:none;" class="in_product_price"> @item.PriceSale</div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="product_price">@WebBanHangOnline.Common.Common.FormatNumber(item.Price, 0)</div>
+                                                        <div style="display:none;" class="in_product_price"> @item.Price</div>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="red_button add_to_cart_button" style="margin-top:60px"><a href="#" class="btnAddToCart" data-id="@item.Id">Thêm vào giỏ hàng</a></div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <h3>Không có sản phẩm nào!!!</h3>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Content/assets/js/categories_custom.js"></script>
+}
+

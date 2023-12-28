@@ -1,0 +1,13 @@
+﻿@model List<WebBanHangOnline.Models.EF.Intro>
+
+
+<ul class="sidebar_categories">
+
+    @foreach (var item in Model)
+    {
+        <li class="active">
+            @Html.ActionLink(item.Title, "Details", "Intro1", new { id = item.Id }, null)
+        </li>
+    }
+</ul>
+
