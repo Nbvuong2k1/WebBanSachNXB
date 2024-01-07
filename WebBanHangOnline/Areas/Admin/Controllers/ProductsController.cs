@@ -25,7 +25,7 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
             IEnumerable<Product> items = db.Products.OrderByDescending(x => x.Id);
             if (!string.IsNullOrEmpty(Searchtext))
             {
-                items = items.Where(x => x.Alias.Contains(Searchtext) || x.Title.Contains(Searchtext));
+                items = items.Where(x => x.Alias.Contains(Searchtext) || x.Title.Contains(Searchtext) || x.Author.Contains(Searchtext));
             }
             var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             items = items.ToPagedList(pageIndex, pageSize);
