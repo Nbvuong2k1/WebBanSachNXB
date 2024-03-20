@@ -88,7 +88,7 @@
                         <th>Hình ảnh</th>
                         <th>Tên sản phẩm</th>
                         <th>Tác giả</th>
-                        <th>NXB</th>
+                        @*<th>NXB</th>*@
                         <th>Thể loại</th>
                         <th>Số lượng</th>
                         <th>Giá</th>
@@ -96,6 +96,7 @@
                         <th>Home</th>
                         <th>Sale</th>
                         <th>Hiển thị</th>
+                        @*<th>Thao tác</th>*@
 
                         <th style="width:150px;"></th>
                     </tr>
@@ -121,7 +122,7 @@
                                 <td><img class="imgproduct" data-id="@item.Id" src="@strImg" width="50" /></td>
                                 <td>@item.Title</td>
                                 <td>@item.Author</td>
-                                <td>@item.NXB</td>
+                                @*<td>@item.NXB</td>*@
                                 <td>@item.ProductCategory.Title</td>
                                 <td>@item.Quantity</td>
                                 <td>@WebBanHangOnline.Common.Common.FormatNumber(item.Price, 0)</td>

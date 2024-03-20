@@ -31,7 +31,7 @@ namespace WebBanHangOnline.Models.EF
         [StringLength(250)]
         public string Author { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(250)]
         public string NXB { get; set; }
 
